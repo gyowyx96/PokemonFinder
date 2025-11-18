@@ -1,33 +1,30 @@
 import "./Background.scss";
-import pokemon from "../../assets/pkmn.webp";
-import usePokemonSelection from "../../hook/usePokemonSelection";
-
+import pokemon from "../../assets/pkmn1.webp";
+import { selectPokemon, selectSelectedPokemon } from "../../store/slices/selectPokemonSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { pokemonSelect } from "../../utils/pokemon";
 
 const Background = () => {
-  const { selectedPokemon, selectRandomPokemon } = usePokemonSelection();
+  const selectedPokemon = useSelector(selectSelectedPokemon);
+  const dispatch = useDispatch();
 
-  const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
     const img = container.querySelector("#pokemons-img") as HTMLImageElement;
+    if (!img || !selectedPokemon) return;
 
-    if (!img) return;
-
-    // Otteniamo la posizione effettiva dell’immagine renderizzata nel div
     const imgRect = img.getBoundingClientRect();
-
-    // Coordinate del click relative all’immagine (perfette anche con zoom)
     const x = Math.floor(e.clientX - imgRect.left);
     const y = Math.floor(e.clientY - imgRect.top);
+    
+    console.log(`Clicked at: (${x}, ${y})`);
 
-    const finalPokemonX = selectedPokemon.pos.x * Math.min((imgRect.width / img.naturalWidth), 1);
-    const finalPokemonY =  selectedPokemon.pos.y * Math.min((imgRect.height / img.naturalHeight), 1);
+    const scale = Math.min(imgRect.width / img.naturalWidth, 1);
+    const finalPokemonX = selectedPokemon.pos.x * scale;
+    const finalPokemonY = selectedPokemon.pos.y * scale;
 
-    console.log("Coordinate reali sull'immagine:", x, y);
-    console.log("Posizione Pokemon:", finalPokemonX, finalPokemonY,  window.innerWidth / 1440);
-
-    // Range attorno al Pokémon
-    const rangeX = [x - 70, x + 70];
-    const rangeY = [y - 70, y + 70];
+    const rangeX = [x - 50, x + 50];
+    const rangeY = [y - 50, y + 50];
 
     if (
       finalPokemonX >= rangeX[0] &&
@@ -35,15 +32,14 @@ const Background = () => {
       finalPokemonY >= rangeY[0] &&
       finalPokemonY <= rangeY[1]
     ) {
-      console.log("Pokemon trovato!");
-      alert("Hai trovato il Pokemon!");
-      selectRandomPokemon();
+      alert(`Hai trovato ${selectedPokemon.name}!`);
+      dispatch(selectPokemon(pokemonSelect()));
     }
   };
 
   return (
     <div className="main-img" onClick={handleClick}>
-      <img src={pokemon} alt="Pokemon" id="pokemons-img"/>
+      <img src={pokemon} alt="Pokemon" id="pokemons-img" />
     </div>
   );
 };

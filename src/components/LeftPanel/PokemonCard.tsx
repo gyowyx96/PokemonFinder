@@ -4,25 +4,42 @@ import PokemonDetails from "./PokemonDetails";
 import "./PokemonCard.scss";
 
 type PokemonCardProps = {
-  nome: string; // <- qui dichiari la prop
+  name?: string; // <- qui dichiari la prop
+  shiny?: boolean;
 };
-const PokemonCard = ({ nome }: PokemonCardProps) => {
-  const [pokemon, setPokemon] = useState<PokemonType>(null!);
+const PokemonCard = ({ name, shiny }: PokemonCardProps) => {
+  const [pokemon, setPokemon] = useState<PokemonType | null>(null);
 
-  useEffect(() => {
-    
-    const fetchPokemon = async () => {        
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nome}`);
-        const data = await response.json();
-        const pokeEntry = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${nome}`);
-        const pokeEntryData = await pokeEntry.json();
-        const fullData = { ...data, ...pokeEntryData };
-        setPokemon(fullData);
-        console.log(fullData);
-    };
+useEffect(() => {
+  console.log("PokemonCard mounted or updated");
+  if (!name) return;
 
-    fetchPokemon();
-  }, [nome]);
+  const fetchPokemon = async () => {
+    console.log(`Fetching data for ${name} (shiny: ${shiny})`);
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+      if (!response.ok) throw new Error(`Errore fetch pokemon: ${response.status}`);
+      const data = await response.json();
+
+      let pokeEntryData = {};
+      try {
+        const pokeEntry = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
+        if (!pokeEntry.ok) throw new Error(`Errore fetch species: ${pokeEntry.status}`);
+        pokeEntryData = await pokeEntry.json();
+      } catch (err) {
+        console.warn("Species non disponibile, uso dati base", err);
+      }
+
+      const fullData = { ...data, ...pokeEntryData, shiny: shiny || false };
+      setPokemon(fullData);
+    } catch (err) {
+      console.error("Errore fetch Pokemon:", err);
+      setPokemon(null);
+    }
+  };
+
+  fetchPokemon();
+}, [name, shiny]);
 
   if (!pokemon) return <div>Loading...</div>;
 

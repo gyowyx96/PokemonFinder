@@ -1,15 +1,18 @@
-import './App.scss'
-import PokemonCard from './components/LeftPanel/PokemonCard'
-import Background from './components/MainPanel/Background'
-import usePokemonSelection from './hook/usePokemonSelection';
+import { useSelector } from "react-redux";
+import "./App.scss";
+import PokemonCard from "./components/LeftPanel/PokemonCard";
+import Background from "./components/MainPanel/Background";
+import { selectSelectedPokemon } from "./store/slices/selectPokemonSlice";
 
 function App() {
-  const { selectedPokemon } = usePokemonSelection();
+  const selectedPokemon = useSelector(selectSelectedPokemon);
+
   return (
     <div className="main-body">
-      <PokemonCard nome={selectedPokemon.nome} />
-      <Background pokemonPos={selectedPokemon.pos} />
+      {selectedPokemon && <PokemonCard name={selectedPokemon.name} shiny={selectedPokemon.shiny} />}   
+      {selectedPokemon && <Background />} {}
     </div>
   );
 }
-export default App
+
+export default App;

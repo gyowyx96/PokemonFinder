@@ -4,9 +4,8 @@ type PokeProps = {
     pokemon: PokemonType
 }
 const PokemonDetails = ({ pokemon } : PokeProps ) => {
-    const isShyny = false;
     let sprite = pokemon.sprites.front_default;
-    if (isShyny) sprite = pokemon.sprites.front_shiny;
+    if (pokemon.shiny) sprite = pokemon.sprites.front_shiny;
     const getIta = () => {
         const entry = pokemon.flavor_text_entries?.find(
             (entry) => entry.language.name === "it"
@@ -19,6 +18,7 @@ const PokemonDetails = ({ pokemon } : PokeProps ) => {
         <div>
             <h1>Acchiappa  {(pokemon.name).charAt(0).toUpperCase() + pokemon.name.slice(1)} </h1>
             <img src={sprite} alt={pokemon.name} />
+            <p>Shiny: {pokemon.shiny ? "Si" : "No"}</p>
             <p>Descrizione: {getIta()}</p>
         </div>
     )

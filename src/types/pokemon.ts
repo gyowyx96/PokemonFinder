@@ -9,7 +9,7 @@ export type PokemonType = {
     name: string;
     height: number;
     weight: number;
-    isShiny: boolean;
+    shiny: boolean;
     flavor_text_entries: FlavorTextEntry[];
     sprites: {
         front_default: string;
@@ -18,6 +18,7 @@ export type PokemonType = {
 };
 
 export type SelectedPokemonType = {
-    nome: string;
+    name: string;
     pos: { x: number; y: number };
+    shiny?: boolean;
 };
