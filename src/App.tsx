@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import "./App.sass";
+import "./App.scss";
 import PokemonCard from "./components/LeftPanel/PokemonCard";
 import Background from "./components/MainPanel/Background";
 import { selectSelectedPokemon } from "./store/slices/selectPokemonSlice";
