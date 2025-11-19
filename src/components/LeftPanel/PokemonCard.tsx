@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { PokemonType } from "../../types/pokemon";
 import PokemonDetails from "./PokemonDetails";
-import "./PokemonCard.scss";
+import "./pokemonCard.scss";
 
 type PokemonCardProps = {
   name?: string; // <- qui dichiari la prop
