@@ -17,8 +17,8 @@ export type PokemonType = {
     };
 };
 
-export type SelectedPokemonType = {
+/* export type SelectedPokemonType = {
     name: string;
     pos: { x: number; y: number };
     shiny?: boolean;
-};
+}; */

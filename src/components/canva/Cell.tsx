@@ -1,10 +1,12 @@
 import "./cell.scss"
 type CellProps = {
      id: number,
+     colonne: number,
+     righe: number
 };
-const Cell = ({ id }: CellProps) => {
+const Cell = ({ id , colonne, righe}: CellProps) => {
     const handleClick = () => {
-        console.log(`Clicked on Pokemon with ID: ${id}`);
+        console.log(`Cella ${id} cliccata! Posizione: (Colonna: ${colonne}, Riga: ${righe})`);
     }
     return(
         <div key={id} className="cell" onClick={handleClick}>

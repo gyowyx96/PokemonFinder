@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import "./App.scss";
 import PokemonCard from "./components/LeftPanel/PokemonCard";
-import { selectSelectedPokemon } from "./store/slices/selectPokemonSlice";
+import { selectSelectedPokemonId } from "./store/slices/selectPokemonSlice";
 import Canva from "./components/canva/Canva";
 
 function App() {
-  const selectedPokemon = useSelector(selectSelectedPokemon);
+  // Prendiamo SOLO l'ID dal Redux store
+  const selectedPokemonId = useSelector(selectSelectedPokemonId);
 
   return (
     <div className="main-body">
-      {selectedPokemon && <PokemonCard name={selectedPokemon.name} shiny={selectedPokemon.shiny} />}
-      {<Canva />}
+      {/* Passiamo l'ID come prop a PokemonCard */}
+      {selectedPokemonId && <PokemonCard id={selectedPokemonId} />}
+      <Canva />
     </div>
   );
 }
