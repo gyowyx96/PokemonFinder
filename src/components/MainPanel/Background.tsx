@@ -1,4 +1,4 @@
-import "./background.scss";
+import "./Background.scss";
 import pokemon from "../../assets/pkmn1.webp";
 import { selectPokemon, selectSelectedPokemon } from "../../store/slices/selectPokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
