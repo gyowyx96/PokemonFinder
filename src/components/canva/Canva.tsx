@@ -10,10 +10,14 @@ const Canva = () => {
         allIds.sort(() => Math.random() - 0.5); // shuffle
         return allIds.slice(0, numberOfPokemon);
     });
-  return (<div className="pokemon-canva">
-            {ids.map(id =>{
-                return( <Cell key={id} id={id} /> )
-            })}
-        </div>);
+  return (
+    <div className="container">
+        <div className="pokemon-canva"
+            style={{
+                gridTemplateColumns: `repeat(${numberOfPokemon / 10}, 30px)`
+            }}>
+            {ids.map(id => <Cell key={id} id={id} />)}
+            </div>
+    </div>);
 }
 export default Canva;

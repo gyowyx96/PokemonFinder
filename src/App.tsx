@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import "./App.scss";
 import PokemonCard from "./components/LeftPanel/PokemonCard";
-import Background from "./components/MainPanel/Background";
 import { selectSelectedPokemon } from "./store/slices/selectPokemonSlice";
 import Canva from "./components/canva/Canva";
 
@@ -10,9 +9,8 @@ function App() {
 
   return (
     <div className="main-body">
+      {selectedPokemon && <PokemonCard name={selectedPokemon.name} shiny={selectedPokemon.shiny} />}
       {<Canva />}
-      {selectedPokemon && <PokemonCard name={selectedPokemon.name} shiny={selectedPokemon.shiny} />}   
-      {selectedPokemon && <Background />} {}
     </div>
   );
 }
