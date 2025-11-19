@@ -1,0 +1,8 @@
+.pokemon-canva {
+  display: grid;
+  grid-template-columns: repeat(10, 80px);  // 10 colonne
+  grid-auto-rows: 80px;                     // altezza righe
+  gap: 0;
+  justify-content: center;
+  position: relative;
+}
