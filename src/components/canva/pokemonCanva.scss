@@ -4,15 +4,10 @@
   background-color: black;
   width: 100%;
   height: 500px;
-  display: flex;
   align-items: center;
 
   .pokemon-canva {
     display: grid;// 10 colonne
-    grid-auto-rows: 30px;                     // altezza righe
     gap: 0;
-    justify-content: center;
-    position: relative;
-    margin-top: 50px;
   }
 }

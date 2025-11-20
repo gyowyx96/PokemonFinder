@@ -18,12 +18,18 @@ const selectedPokemonSlice = createSlice({
     setSelectPokemonId: (state, action: PayloadAction<number>) => {
       state.selectedId = action.payload;
     },
+    setSelectPokemonPos: (state, action: PayloadAction<{ x: number; y: number }>) => {
+      state.pos = action.payload;
+    },
   },
 });
 
-export const { setSelectPokemonId } = selectedPokemonSlice.actions;
+export const { setSelectPokemonId, setSelectPokemonPos } = selectedPokemonSlice.actions;
 
 export const selectSelectedPokemonId = (state: RootState) =>
   state.selectedPokemon.selectedId;
+
+export const selectSelectedPokemonPos = (state: RootState) =>
+  state.selectedPokemon.pos;
 
 export default selectedPokemonSlice.reducer;

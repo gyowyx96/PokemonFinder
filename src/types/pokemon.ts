@@ -7,6 +7,7 @@ export type FlavorTextEntry = {
 
 export type PokemonType = {
     name: string;
+    id: number;
     height: number;
     weight: number;
     shiny: boolean;

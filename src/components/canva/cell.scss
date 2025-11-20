@@ -1,19 +1,10 @@
 
-$cellSize: 60px;
+$cellSize: 30px;
 
 .cell {
   width: $cellSize;
   height: $cellSize;
-  overflow: visible;
-  position: relative;
   :hover{
     cursor: pointer;
-  }
-  img{
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 }

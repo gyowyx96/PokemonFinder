@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import type { PokemonType } from "../../types/pokemon";
 import PokemonDetails from "./PokemonDetails";
 import "./pokemonCard.scss";
-import { selectSelectedPokemonId } from "../../store/slices/selectPokemonSlice";
+import { selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
 
 type PokemonCardProps = {
   id?: number;
@@ -15,6 +15,7 @@ const PokemonCard = ({ shiny }: PokemonCardProps) => {
 
   // ⬇️ PRENDI L’ID SALVATO IN REDUX
   const id = useSelector(selectSelectedPokemonId);
+  const pos = useSelector(selectSelectedPokemonPos);
 
   useEffect(() => {
     if (!id) return;
@@ -48,7 +49,7 @@ const PokemonCard = ({ shiny }: PokemonCardProps) => {
 
   return (
     <div className="poke-card">
-      <PokemonDetails pokemon={pokemon} />
+      <PokemonDetails pokemon={pokemon} position={pos}/>
     </div>
   );
 };

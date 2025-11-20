@@ -1,11 +1,14 @@
 import type { PokemonType } from "../../types/pokemon"
 
 type PokeProps = {
-    pokemon: PokemonType
+    pokemon: PokemonType,
+    position?: { x: number; y: number};
 }
-const PokemonDetails = ({ pokemon } : PokeProps ) => {
+
+const PokemonDetails = ({ pokemon, position } : PokeProps ) => {
     let sprite = pokemon.sprites.front_default;
     if (pokemon.shiny) sprite = pokemon.sprites.front_shiny;
+
     const getIta = () => {
         const entry = pokemon.flavor_text_entries?.find(
             (entry) => entry.language.name === "it"
@@ -14,12 +17,14 @@ const PokemonDetails = ({ pokemon } : PokeProps ) => {
             ? entry.flavor_text.replace(/\n|\f/g, " ")
             : pokemon.flavor_text_entries?.[0]?.flavor_text.replace(/\n|\f/g, " ") || "No description";
     };
+    
     return (
         <div>
             <h1>Acchiappa  {(pokemon.name).charAt(0).toUpperCase() + pokemon.name.slice(1)} </h1>
             <img src={sprite} alt={pokemon.name} />
             <p>Shiny: {pokemon.shiny ? "Si" : "No"}</p>
             <p>Descrizione: {getIta()}</p>
+             <p>Posizione: {position ? `${position.x}, ${position.y}` : "sconosciuta"}</p>
         </div>
     )
 }

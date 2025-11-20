@@ -1,17 +1,31 @@
-import "./cell.scss"
+import { useRef } from "react";
+import "./cell.scss";
+
 type CellProps = {
-     id: number,
-     colonne: number,
-     righe: number
+    id: number;
+    onPosition: (id: number, x: number, y: number) => void;
 };
-const Cell = ({ id , colonne, righe}: CellProps) => {
-    const handleClick = () => {
-        console.log(`Cella ${id} cliccata! Posizione: (Colonna: ${colonne}, Riga: ${righe})`);
-    }
-    return(
-        <div key={id} className="cell" onClick={handleClick}>
-            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}/>
+
+const Cell = ({ id, onPosition }: CellProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    const handleLoad = () => {
+        if (ref.current) {
+            const rect = ref.current.getBoundingClientRect();
+            onPosition(id, rect.left, rect.top + 300);
+            console.log(`Cella ${id} posizione inviata: ${rect.left}, ${rect.top}`);
+        }
+    };
+
+    return (
+        <div ref={ref} className="cell">
+            <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+                onLoad={handleLoad}
+                alt={`pokemon-${id}`}
+            />
         </div>
-    )
-}
+    );
+};
+
 export default Cell;
