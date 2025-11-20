@@ -5,7 +5,7 @@ type PokeProps = {
     position?: { x: number; y: number};
 }
 
-const PokemonDetails = ({ pokemon, position } : PokeProps ) => {
+const PokemonDetails = ({ pokemon } : PokeProps ) => {
     let sprite = pokemon.sprites.front_default;
     if (pokemon.shiny) sprite = pokemon.sprites.front_shiny;
 
@@ -24,7 +24,6 @@ const PokemonDetails = ({ pokemon, position } : PokeProps ) => {
             <img src={sprite} alt={pokemon.name} />
             <p>Shiny: {pokemon.shiny ? "Si" : "No"}</p>
             <p>Descrizione: {getIta()}</p>
-             <p>Posizione: {position ? `${position.x}, ${position.y}` : "sconosciuta"}</p>
         </div>
     )
 }
