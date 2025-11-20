@@ -13,7 +13,6 @@ const Cell = ({ id, onPosition }: CellProps) => {
         if (ref.current) {
             const rect = ref.current.getBoundingClientRect();
             onPosition(id, rect.left, rect.top + 250);
-            console.log(`Cella ${id} posizione inviata: ${rect.left}, ${rect.top}`);
         }
     };
 
