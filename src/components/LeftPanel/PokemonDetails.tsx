@@ -22,7 +22,6 @@ const PokemonDetails = ({ pokemon } : PokeProps ) => {
         <div>
             <h1>Acchiappa  {(pokemon.name).charAt(0).toUpperCase() + pokemon.name.slice(1)} </h1>
             <img src={sprite} alt={pokemon.name} />
-            <p>Shiny: {pokemon.shiny ? "Si" : "No"}</p>
             <p>Descrizione: {getIta()}</p>
         </div>
     )
