@@ -4,7 +4,7 @@ import Cell from "./Cell";
 import "./pokemonCanva.scss";
 import { setSelectPokemonId, setSelectPokemonPos, selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
 
-const numberOfPokemon = 500;
+const numberOfPokemon = 300;
 const maxPokemonId = 1000;
 const numberOfColumns = numberOfPokemon / 10;
 const celDim = "30px";
