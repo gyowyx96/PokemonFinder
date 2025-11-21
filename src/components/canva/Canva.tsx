@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Cell from "../cell/Cell";
 import "./pokemonCanva.scss";
 import { setSelectPokemonId, setSelectPokemonPos, selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
-import { selectPokemonName } from "../../store/slices/pokemonName";
-import { capitalize } from "../../utils/capitalize";
+
+//import { selectPokemonName } from "../../store/slices/pokemonName";
+//import { capitalize } from "../../utils/capitalize";
 
 const numberOfPokemon = 100;
 const maxPokemonId = 1000;
@@ -16,14 +17,16 @@ type PokemonCell = {
   posX: number;
   posY: number;
 };
-
-const Canva = () => {
+type CanvaProps ={
+  onCatch: () => void
+}
+const Canva = ({onCatch}: CanvaProps) => {
   const dispatch = useDispatch();
 
   // Selezione Pokémon dal Redux store
   const selectedPokemonId = useSelector(selectSelectedPokemonId);
   const selectedPokemonPos = useSelector(selectSelectedPokemonPos);
-  const pokemonName = useSelector(selectPokemonName);
+  //const pokemonName = useSelector(selectPokemonName);
 
   const selectedPokemon = selectedPokemonId && selectedPokemonPos
     ? { id: selectedPokemonId, pos: selectedPokemonPos }
@@ -75,8 +78,9 @@ const Canva = () => {
     Math.abs(clickX - selectedPokemon.pos.x) <= tolerance &&
     Math.abs(clickY - (selectedPokemon.pos.y )) <= tolerance
   ) {
-    alert(`Hai trovato ${capitalize(pokemonName)}!`);
+    //alert(`Hai trovato ${capitalize(pokemonName)}!`);
     setPokemon();
+    onCatch();
   } else {
     console.log(`Click fuori: (${clickX.toFixed(2)}, ${clickY.toFixed(2)})`);
   }

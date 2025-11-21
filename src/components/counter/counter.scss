@@ -1,0 +1,16 @@
+@use "../../utils/variabili.scss" as *;
+
+.counter{
+    font-size: 24px;
+    font-weight: bold;
+}
+@media (prefers-color-scheme: light){
+    .counter{
+        color: $color_light_text
+    }
+}
+@media (prefers-color-scheme: dark){
+    .counter{
+        color: $color_dark_text
+    }
+}
