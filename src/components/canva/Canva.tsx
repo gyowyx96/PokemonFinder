@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cell from "./Cell";
+import Cell from "../cell/Cell";
 import "./pokemonCanva.scss";
 import { setSelectPokemonId, setSelectPokemonPos, selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
+import { selectPokemonName } from "../../store/slices/pokemonName";
+import { capitalize } from "../../utils/capitalize";
 
-const numberOfPokemon = 300;
+const numberOfPokemon = 100;
 const maxPokemonId = 1000;
 const numberOfColumns = numberOfPokemon / 10;
 const celDim = "30px";
@@ -21,6 +23,7 @@ const Canva = () => {
   // Selezione Pokémon dal Redux store
   const selectedPokemonId = useSelector(selectSelectedPokemonId);
   const selectedPokemonPos = useSelector(selectSelectedPokemonPos);
+  const pokemonName = useSelector(selectPokemonName);
 
   const selectedPokemon = selectedPokemonId && selectedPokemonPos
     ? { id: selectedPokemonId, pos: selectedPokemonPos }
@@ -44,31 +47,25 @@ const Canva = () => {
     );
 };
 
-  const resetPokemon = () => {
+  const setPokemon = () => {
     const randomCell = cells[Math.floor(Math.random() * cells.length)];
     dispatch(setSelectPokemonId(randomCell.id));
     dispatch(setSelectPokemonPos({ x : randomCell.posX, y: randomCell.posY}));
-    console.log("Selezione Pokémon resettata.");
   };
 
   // Seleziona un Pokémon casuale **solo quando tutte le celle hanno posizione valida**
   useEffect(() => {
-    const allReady = cells.every(c => c.posX !== 0 && c.posY !== 0);
-    if (!allReady || selectedPokemonId) return; // già selezionato
+    const allReady = cells.every(c => c.posX !== 0 && c.posY !== 0); //Controllo che le posizioni non siano quelle iniziali
+    if (!allReady || selectedPokemonId) return;
 
-    const randomCell = cells[Math.floor(Math.random() * cells.length)];
-
-    dispatch(setSelectPokemonId(randomCell.id));
-    dispatch(setSelectPokemonPos({ x: randomCell.posX, y: randomCell.posY }));
-
-    console.log("Pokemon selezionato:", randomCell.id, "Posizione reale:", randomCell.posX, randomCell.posY);
-  }, [cells, dispatch, selectedPokemonId]);
+    setPokemon();
+    //console.log("Pokemon selezionato:", randomCell.id, "Posizione reale:", randomCell.posX, randomCell.posY);
+  });
 
   // Gestione click per “acchiappa Pokémon”
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
   if (!selectedPokemon) return;
 
-  // posizione del click normalizzata
   const clickX = e.clientX
   const clickY = e.clientY
 
@@ -78,8 +75,8 @@ const Canva = () => {
     Math.abs(clickX - selectedPokemon.pos.x) <= tolerance &&
     Math.abs(clickY - (selectedPokemon.pos.y )) <= tolerance
   ) {
-    alert(`Hai trovato il Pokémon con ID ${selectedPokemon.id}!`);
-    resetPokemon();
+    alert(`Hai trovato ${capitalize(pokemonName)}!`);
+    setPokemon();
   } else {
     console.log(`Click fuori: (${clickX.toFixed(2)}, ${clickY.toFixed(2)})`);
   }
