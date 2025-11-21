@@ -1,3 +1,4 @@
+@use "../../utils/variabili" as *;
 .timer{
     display: flex;
     flex-direction: column;
@@ -8,5 +9,15 @@
     padding: 40px; 
     p{
         margin : 5px;
+    }
+}
+@media (prefers-color-scheme: dark){
+    .timer{
+        color: $color_dark_text;
+    }
+}
+@media (prefers-color-scheme: light){
+    .timer{
+        color: $color_light_text;
     }
 }

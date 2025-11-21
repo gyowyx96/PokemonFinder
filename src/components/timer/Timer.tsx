@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./timer.scss";
+import "../../utils/variabili.scss";
 const Timer = () =>{
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);

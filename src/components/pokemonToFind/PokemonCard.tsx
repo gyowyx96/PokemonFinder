@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import type { PokemonType } from "../../types/pokemon";
 import PokemonDetails from "./PokemonDetails";
 import "./pokemonCard.scss";
+import "../../utils/variabili.scss";
 import { selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
 
 type PokemonCardProps = {

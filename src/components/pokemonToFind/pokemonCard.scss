@@ -1,11 +1,23 @@
+@use "../../utils/variabili" as *;
 .poke-card{
-    background-color: #f2f2f2;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 8px;
     text-align: center;
     width: 700px;
-    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     justify-content: center;
     align-self: center;
+}
+@media (prefers-color-scheme: dark){
+    .poke-card{
+        background-color: $color_dark_bg;
+        color: $color_dark_text;
+    }
+}
+@media (prefers-color-scheme: light){
+    .poke-card{
+        background-color: $color_light_bg;
+        color: $color_light_text;
+    }
 }
