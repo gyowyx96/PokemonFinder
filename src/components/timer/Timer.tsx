@@ -1,25 +1,36 @@
 import { useEffect, useState } from "react";
-import "./timer.scss";
-import "../../utils/variabili.scss";
-const Timer = () =>{
-    const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds(prev => prev + 1);
-            if (seconds === 59) {
-                setMinutes(prev => prev + 1);
-                setSeconds(0);
-            }
-        }, 1000);
-        return () => clearInterval(interval);
-    });
-    return (
-        <div className ="timer"> 
-            <p>Tempo trascorso</p>
-            <p>{minutes === 0 ? null : (`${minutes}:`)}{seconds} </p>
-        </div>
-    )
-}
+import "./timer.scss"
 
-export default Timer;
+const Timer = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prevSeconds => {
+        if (prevSeconds === 0) {
+          if (minutes === 0) {
+            clearInterval(interval);
+            return 0;
+          }
+          setMinutes(prevMinutes => prevMinutes - 1);
+          return 59;
+        } else {
+          return prevSeconds - 1;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [minutes]);
+
+  return (
+    <div className="timer">
+      <p>Tempo trascorso</p>
+      <p>
+        {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+      </p>
+    </div>
+  );
+};
+export default Timer
