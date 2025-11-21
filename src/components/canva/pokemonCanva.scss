@@ -1,13 +1,22 @@
-.container{
+.main-body {
   display: flex;
-  justify-content: center;
-  background-color: black;
-  width: 100%;
-  height: 65vh;
-  align-items: center;
+  flex-direction: column;
+  height: 100vh; // tutta l'altezza dello schermo
 
-  .pokemon-canva {
-    display: grid;// 10 colonne
-    gap: 0;
+  .container{
+    flex: 1; // occupa tutto lo spazio rimasto
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+
+    .pokemon-canva {
+      padding-right: 80px;
+      padding-bottom: 75px;
+      display: grid;// 10 colonne
+      gap: 0;
+    }
   }
-}
+}   
+
+
