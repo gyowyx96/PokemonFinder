@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cell from "../cell/Cell";
+import triggerFlash from "../../utils/triggerFlash";
 import "./pokemonCanva.scss";
 import { setSelectPokemonId, setSelectPokemonPos, selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
 
@@ -34,9 +35,11 @@ const Canva = ({onCatch}: CanvaProps) => {
 
   // Stato celle
   const [cells, setCells] = useState<PokemonCell[]>(() => {
-    const allIds = Array.from({ length: maxPokemonId }, (_, i) => i + 1);
-    allIds.sort(() => Math.random() - 0.5);
-    const selectedIds = allIds.slice(0, numberOfPokemon);
+    const allIds = Array.from({ length: maxPokemonId }, (_, i) => i + 1); //crea un array con gli id di tutti i pokemon
+    allIds.sort(() => Math.random() - 0.5); //randomizza le posizioni nell'array
+
+    const selectedIds = allIds.slice(0, numberOfPokemon); //ne estrae solo una parte equivalente al numero di celle che voglio
+
     return selectedIds.map(id => ({ id, posX: 0, posY: 0 }));
   });
 
@@ -49,14 +52,15 @@ const Canva = ({onCatch}: CanvaProps) => {
       prev.map(cell => (cell.id === id ? { ...cell, posX: relativeX, posY: relativeY } : cell))
     );
 };
-
+  
+  //Seleziona un pokemon da quelli presenti nelle celle passando l'id e la posizione come variabile in store 
   const setPokemon = () => {
     const randomCell = cells[Math.floor(Math.random() * cells.length)];
     dispatch(setSelectPokemonId(randomCell.id));
     dispatch(setSelectPokemonPos({ x : randomCell.posX, y: randomCell.posY}));
   };
 
-  // Seleziona un Pokémon casuale **solo quando tutte le celle hanno posizione valida**
+  // Seleziona un Pokémon casuale solo quando tutte le celle hanno posizione valida
   useEffect(() => {
     const allReady = cells.every(c => c.posX !== 0 && c.posY !== 0); //Controllo che le posizioni non siano quelle iniziali
     if (!allReady || selectedPokemonId) return;
@@ -67,26 +71,27 @@ const Canva = ({onCatch}: CanvaProps) => {
 
   // Gestione click per “acchiappa Pokémon”
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-  if (!selectedPokemon) return;
+    if (!selectedPokemon) return;
 
-  const clickX = e.clientX
-  const clickY = e.clientY
+    const clickX = e.clientX
+    const clickY = e.clientY
 
-  const tolerance = 70;
+    const tolerance = 70;
 
-  if (
-    Math.abs(clickX - selectedPokemon.pos.x) <= tolerance &&
-    Math.abs(clickY - (selectedPokemon.pos.y )) <= tolerance
-  ) {
-    //alert(`Hai trovato ${capitalize(pokemonName)}!`);
-    setPokemon();
-    onCatch();
-  } else {
-    console.log(`Click fuori: (${clickX.toFixed(2)}, ${clickY.toFixed(2)})`);
-  }
-};
+    if (
+      Math.abs(clickX - selectedPokemon.pos.x) <= tolerance &&
+      Math.abs(clickY - (selectedPokemon.pos.y )) <= tolerance
+    ) {
+      triggerFlash();
+      setPokemon();
+      onCatch();
+    } else {
+      console.log(`Click fuori: (${clickX.toFixed(2)}, ${clickY.toFixed(2)})`);
+    }
+  };
+
   return (
-    <div className="container">
+    <div className={`container`}>
       <div
         className="pokemon-canva"
         style={{

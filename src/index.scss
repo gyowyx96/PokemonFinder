@@ -53,5 +53,22 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+//Animazione per il flash alla cattura
+body.flash-screen::after {
+  content: "";
+  position: fixed;
+  inset: 0; // copre tutto lo schermo
+  background: radial-gradient(circle, rgba(255,255,255,0.85), rgba(255,255,255,0));
+  pointer-events: none;
+  animation: flashEffect 0.3s ease-out;
+  z-index: 9999; // sopra tutto
+}
 
-
+@keyframes flashEffect {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
