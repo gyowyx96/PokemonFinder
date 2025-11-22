@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cell from "../cell/Cell";
-import triggerFlash from "../../utils/triggerFlash";
-import "./pokemonCanva.scss";
 import { setSelectPokemonId, setSelectPokemonPos, selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
 
-//import { selectPokemonName } from "../../store/slices/pokemonName";
-//import { capitalize } from "../../utils/capitalize";
+import Cell from "../cell/Cell";
+import triggerFlash from "../../utils/triggerFlash";
+
+import "./pokemonCanva.scss";
 
 const numberOfPokemon = 100;
 const maxPokemonId = 1000;
@@ -27,7 +26,6 @@ const Canva = ({onCatch}: CanvaProps) => {
   // Selezione Pokémon dal Redux store
   const selectedPokemonId = useSelector(selectSelectedPokemonId);
   const selectedPokemonPos = useSelector(selectSelectedPokemonPos);
-  //const pokemonName = useSelector(selectPokemonName);
 
   const selectedPokemon = selectedPokemonId && selectedPokemonPos
     ? { id: selectedPokemonId, pos: selectedPokemonPos }
