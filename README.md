@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+# Pokémon Mini Game – React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🎮 **Try the game here:** [https://pokemon-finder-sigma-bay.vercel.app/](https://pokemon-finder-sigma-bay.vercel.app/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a **work-in-progress project** I'm building to learn and improve my **React fundamentals**.  
 
-## React Compiler
+If you have any suggestions or feedback, feel free to contact me!  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+> **Note:** Currently, the game works **only on PC**. I'm planning to work on the **responsive layout** in the future.
+>  **Language:** The game is currently in Italian, but I'm working on a **multi-language selector**.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features so far
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Find and catch Pokémon from all the generations
+- Timer to track your game  
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **React** + **TypeScript**  
+- **Vite** for fast bundling  
+- **Redux Toolkit** for state management  
+- **SCSS** for styling  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Next Steps
+
+- Add **Lenguage selector** 
+- Add **difficulty selector**
+- Add **score board**
+- Make the game **fully responsive** for mobile devices  
+- Add **sound effects**  
+- Improve UI/UX with Pokémon-themed styling  
+---
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/pokemon-mini-game.git
+
+# Go into the project folder
+cd pokemon-mini-game
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+
