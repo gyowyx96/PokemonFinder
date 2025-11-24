@@ -9,7 +9,7 @@ This is a **work-in-progress project** I'm building to learn and improve my **Re
 If you have any suggestions or feedback, feel free to contact me!  
 
 > **Note:** Currently, the game works **only on PC**. I'm planning to work on the **responsive layout** in the future.
->  🌐 **Language:** The game is currently in Italian, but I'm working on a **multi-language selector**.
+>  **Language:** The game is currently in Italian, but I'm working on a **multi-language selector**.
 
 ---
 
