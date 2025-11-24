@@ -5,11 +5,11 @@
 ---
 
 This is a **work-in-progress project** I'm building to learn and improve my **React fundamentals**.  
-Currently the game is in italian but i'm working on a multi-lenguage selector.
 
 If you have any suggestions or feedback, feel free to contact me!  
 
-> **Note:** Currently, the game works **only on PC**. I'm planning to work on the **responsive layout** in the future.  
+> **Note:** Currently, the game works **only on PC**. I'm planning to work on the **responsive layout** in the future.
+>  🌐 **Language:** The game is currently in Italian, but I'm working on a **multi-language selector**.
 
 ---
 
