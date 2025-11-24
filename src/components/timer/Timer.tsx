@@ -1,36 +1,32 @@
-import { useEffect, useState } from "react";
-import "./timer.scss"
+import { useEffect } from "react";
+import "./timer.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, selectRunning, selectTimer } from "../../store/slices/timerSlice";
 
 const Timer = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(1);
+  const time = useSelector(selectTimer);
+  const isRunning = useSelector(selectRunning);
+  const dispatch = useDispatch();
+
+  // Deriviamo direttamente active
+  const active = time <= 10;
 
   useEffect(() => {
+    if (!isRunning) return;
+
     const interval = setInterval(() => {
-      setSeconds(prevSeconds => {
-        if (prevSeconds === 0) {
-          if (minutes === 0) {
-            clearInterval(interval);
-            return 0;
-          }
-          setMinutes(prevMinutes => prevMinutes - 1);
-          return 59;
-        } else {
-          return prevSeconds - 1;
-        }
-      });
+      dispatch(decrement());
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [minutes]);
+  }, [dispatch, isRunning]);
 
   return (
-    <div className="timer">
-      <p>Tempo trascorso</p>
-      <p>
-        {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-      </p>
+    <div className={`timer ${active ? "red-time active" : ""}`}>
+      <p>Tempo Rimanente</p>
+      <p>{time} Secondi</p>
     </div>
   );
 };
-export default Timer
+
+export default Timer;

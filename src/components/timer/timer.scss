@@ -11,6 +11,7 @@
         margin : 5px;
     }
 }
+
 @media (prefers-color-scheme: dark){
     .timer{
         color: $color_dark_text;
@@ -20,4 +21,8 @@
     .timer{
         color: $color_light_text;
     }
+}
+
+.red-time{
+    color: red;
 }

@@ -6,10 +6,9 @@ import Cell from "../cell/Cell";
 import triggerFlash from "../../utils/triggerFlash";
 
 import "./pokemonCanva.scss";
-
-const numberOfPokemon = 100;
-const maxPokemonId = 1000;
-const numberOfColumns = numberOfPokemon / 10;
+import { NumberOfPokemon, MaxPokemonId  } from "../../utils/configVariable";
+import { pause, selectTimer } from "../../store/slices/timerSlice";
+const numberOfColumns = NumberOfPokemon / 10;
 const celDim = "30px";
 
 type PokemonCell = {
@@ -26,6 +25,7 @@ const Canva = ({onCatch}: CanvaProps) => {
   // Selezione Pokémon dal Redux store
   const selectedPokemonId = useSelector(selectSelectedPokemonId);
   const selectedPokemonPos = useSelector(selectSelectedPokemonPos);
+  const timeLeft = useSelector(selectTimer)
 
   const selectedPokemon = selectedPokemonId && selectedPokemonPos
     ? { id: selectedPokemonId, pos: selectedPokemonPos }
@@ -33,10 +33,10 @@ const Canva = ({onCatch}: CanvaProps) => {
 
   // Stato celle
   const [cells, setCells] = useState<PokemonCell[]>(() => {
-    const allIds = Array.from({ length: maxPokemonId }, (_, i) => i + 1); //crea un array con gli id di tutti i pokemon
+    const allIds = Array.from({ length: MaxPokemonId }, (_, i) => i + 1); //crea un array con gli id di tutti i pokemon
     allIds.sort(() => Math.random() - 0.5); //randomizza le posizioni nell'array
 
-    const selectedIds = allIds.slice(0, numberOfPokemon); //ne estrae solo una parte equivalente al numero di celle che voglio
+    const selectedIds = allIds.slice(0, NumberOfPokemon); //ne estrae solo una parte equivalente al numero di celle che voglio
 
     return selectedIds.map(id => ({ id, posX: 0, posY: 0 }));
   });
@@ -87,6 +87,13 @@ const Canva = ({onCatch}: CanvaProps) => {
       console.log(`Click fuori: (${clickX.toFixed(2)}, ${clickY.toFixed(2)})`);
     }
   };
+  //Controllo per vedere che il tempo non sia ancora scaduto
+  if (timeLeft <= 0){
+    dispatch(pause())
+    return <>
+      <h1>Tempo scaduto</h1>
+    </>
+  }
 
   return (
     <div className={`container`}>
