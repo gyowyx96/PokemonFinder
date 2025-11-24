@@ -5,6 +5,7 @@
 ---
 
 This is a **work-in-progress project** I'm building to learn and improve my **React fundamentals**.  
+Currently the game is in italian but i'm working on a multi-lenguage selector.
 
 If you have any suggestions or feedback, feel free to contact me!  
 
@@ -30,6 +31,7 @@ If you have any suggestions or feedback, feel free to contact me!
 
 ## Next Steps
 
+- Add **Lenguage selector** 
 - Add **difficulty selector**
 - Add **score board**
 - Make the game **fully responsive** for mobile devices  
