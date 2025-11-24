@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import "./timer.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, selectRunning, selectTimer } from "../../store/slices/timerSlice";
+import { TempoRosso } from "../../utils/configVariable";
+
 
 const Timer = () => {
   const time = useSelector(selectTimer);
@@ -9,7 +11,7 @@ const Timer = () => {
   const dispatch = useDispatch();
 
   // Deriviamo direttamente active
-  const active = time <= 10;
+  const active = time <= TempoRosso;
 
   useEffect(() => {
     if (!isRunning) return;
