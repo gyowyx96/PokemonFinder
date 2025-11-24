@@ -8,6 +8,8 @@ import triggerFlash from "../../utils/triggerFlash";
 import "./pokemonCanva.scss";
 import { NumberOfPokemon, MaxPokemonId  } from "../../utils/configVariable";
 import { pause, selectTimer } from "../../store/slices/timerSlice";
+import EndGameModal from "../endGameModal/EndGameModal";
+import { selectScore } from "../../store/slices/scoreSlice";
 const numberOfColumns = NumberOfPokemon / 10;
 const celDim = "30px";
 
@@ -25,7 +27,8 @@ const Canva = ({onCatch}: CanvaProps) => {
   // Selezione Pokémon dal Redux store
   const selectedPokemonId = useSelector(selectSelectedPokemonId);
   const selectedPokemonPos = useSelector(selectSelectedPokemonPos);
-  const timeLeft = useSelector(selectTimer)
+  const timeLeft = useSelector(selectTimer);
+  const score = useSelector(selectScore);
 
   const selectedPokemon = selectedPokemonId && selectedPokemonPos
     ? { id: selectedPokemonId, pos: selectedPokemonPos }
@@ -90,9 +93,7 @@ const Canva = ({onCatch}: CanvaProps) => {
   //Controllo per vedere che il tempo non sia ancora scaduto
   if (timeLeft <= 0){
     dispatch(pause())
-    return <>
-      <h1>Tempo scaduto</h1>
-    </>
+    return(<EndGameModal score={score}></EndGameModal>)
   }
 
   return (
