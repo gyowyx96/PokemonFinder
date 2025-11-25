@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectPokemonId, setSelectPokemonPos, selectSelectedPokemonId, selectSelectedPokemonPos } from "../../store/slices/selectPokemonSlice";
+import { selectScore } from "../../store/slices/scoreSlice";
+import { pause, selectTimer } from "../../store/slices/timerSlice";
 
+import { NumberOfPokemon, MaxPokemonId  } from "../../utils/configVariable";
+
+import EndGameModal from "../endGameModal/EndGameModal";
 import Cell from "../cell/Cell";
 import triggerFlash from "../../utils/triggerFlash";
 
 import "./pokemonCanva.scss";
-import { NumberOfPokemon, MaxPokemonId  } from "../../utils/configVariable";
-import { pause, selectTimer } from "../../store/slices/timerSlice";
-import EndGameModal from "../endGameModal/EndGameModal";
-import { selectScore } from "../../store/slices/scoreSlice";
+
+
+
+
 const numberOfColumns = NumberOfPokemon / 10;
 const celDim = "30px";
 
