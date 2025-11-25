@@ -5,6 +5,7 @@ const EndGameModal = ( {score} : {score : number}) => {
       <div className="modal-content">
         <h2>Game Over!</h2>
         <p>Hai catturato {score} pokemon!</p>
+        <button onClick={() => window.location.reload()}>Gioca Ancora</button>
       </div>
     </div>
   );
